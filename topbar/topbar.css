@@ -86,7 +86,7 @@
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: var(--spacing-lg);
+    gap: 15px;
     margin: 0;
     padding: 0;
 }
@@ -99,7 +99,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     color: var(--text-primary);
     font-weight: 500;
     font-size: 0.95rem;
@@ -107,11 +107,37 @@
     border-radius: var(--radius-sm);
     transition: var(--transition-fast);
     white-space: nowrap;
+    position: relative;
+}
+
+/* Animated underline effect for dropdown links */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-primary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
 .nav-link:hover {
     background-color: var(--bg-primary);
     color: var(--accent-primary);
+}
+
+/* Expand underline on hover */
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Fade out effect when hover ends */
+.nav-link:not(:hover)::after {
+    width: 0;
+    opacity: 0;
+    transition: all 0.4s ease-out;
 }
 
 .nav-link.active {
@@ -144,8 +170,8 @@
     box-shadow: 0 8px 24px var(--shadow-medium);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all var(--transition-medium);
+    transform: translateY(-20px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1001;
     min-width: 200px;
 }
@@ -154,10 +180,92 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    animation: fadeInDown 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* FadeInDown Animation */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .dropdown-content {
     padding: var(--spacing-lg);
+}
+
+/* Smooth exit animation */
+.dropdown-menu:not(.open) {
+    animation: fadeOutUp 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+
+/* Mega menu smooth exit */
+.mega-menu:not(.open) {
+    animation: fadeOutUpMega 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+
+@keyframes fadeOutUpMega {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-15px);
+    }
+}
+
+/* Special exit animations for Men's and Women's Collection dropdowns */
+#mensDropdown:not(.open),
+#womensDropdown:not(.open) {
+    animation: fadeOutUpSpecial 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+
+@keyframes fadeOutUpSpecial {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+
+/* Staggered animation for dropdown items */
+.dropdown-menu.open .dropdown-column li {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideInUp 0.3s ease forwards;
+}
+
+.dropdown-menu.open .dropdown-column li:nth-child(1) { animation-delay: 0.1s; }
+.dropdown-menu.open .dropdown-column li:nth-child(2) { animation-delay: 0.15s; }
+.dropdown-menu.open .dropdown-column li:nth-child(3) { animation-delay: 0.2s; }
+.dropdown-menu.open .dropdown-column li:nth-child(4) { animation-delay: 0.25s; }
+.dropdown-menu.open .dropdown-column li:nth-child(5) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .dropdown-column h4 {
@@ -197,13 +305,50 @@
 /* Mega Menu Styles */
 .mega-menu {
     left: 50%;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(-20px);
     min-width: 800px;
     max-width: 1000px;
 }
 
 .mega-menu.open {
     transform: translateX(-50%) translateY(0);
+    animation: fadeInDownMega 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Special positioning for Men's and Women's Collection dropdowns */
+#mensDropdown,
+#womensDropdown {
+    left: 60px; /* Position at the right edge of the sidebar (60px width) */
+    transform: translateY(-20px);
+    min-width: 800px;
+    max-width: 1000px;
+}
+
+#mensDropdown.open,
+#womensDropdown.open {
+    transform: translateY(0);
+    animation: fadeInDownMega 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Adjust position when sidebar is expanded (hovered) */
+.vertical-nav:hover ~ .topbar #mensDropdown,
+.vertical-nav:hover ~ .topbar #womensDropdown,
+body:has(.vertical-nav:hover) #mensDropdown,
+body:has(.vertical-nav:hover) #womensDropdown {
+    left: 220px; /* Position at the right edge of expanded sidebar */
+    transition: left 0.3s ease-in-out;
+}
+
+/* FadeInDown Animation for Mega Menus */
+@keyframes fadeInDownMega {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 .mega-content {
@@ -211,6 +356,26 @@
     grid-template-columns: repeat(4, 1fr) 200px;
     gap: var(--spacing-xl);
     padding: var(--spacing-xl);
+}
+
+/* Staggered animation for mega menu columns */
+.mega-menu.open .mega-column {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: slideInUpMega 0.4s ease forwards;
+}
+
+.mega-menu.open .mega-column:nth-child(1) { animation-delay: 0.1s; }
+.mega-menu.open .mega-column:nth-child(2) { animation-delay: 0.15s; }
+.mega-menu.open .mega-column:nth-child(3) { animation-delay: 0.2s; }
+.mega-menu.open .mega-column:nth-child(4) { animation-delay: 0.25s; }
+.mega-menu.open .mega-specials { animation-delay: 0.3s; }
+
+@keyframes slideInUpMega {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .mega-column {
@@ -417,6 +582,18 @@
 
 
 /* Responsive Design */
+@media (min-width: 992px) {
+    /* Objective 1: Shift Logo and Navigation Links to the Left */
+    .topbar-container {
+        padding-left: 5px;
+    }
+
+    /* Objective 2: Extend the Search Input Field */
+    .search-line {
+        width: 420px;
+    }
+}
+
 @media (max-width: 1200px) {
     .nav-menu {
         gap: var(--spacing-md);

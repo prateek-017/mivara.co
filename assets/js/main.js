@@ -45,6 +45,9 @@ const MivaraApp = {
 
         // Setup sidebar hover functionality
         this.setupSidebarHover();
+
+        // Setup topbar dropdown hover functionality
+        this.setupTopbarDropdownHover();
     },
 
     // Handle window resize
@@ -83,6 +86,90 @@ const MivaraApp = {
                     this.adjustContentForSidebar(false);
                 }
             });
+        }
+    },
+
+    // Setup topbar dropdown hover functionality
+    setupTopbarDropdownHover() {
+        const dropdownContainers = document.querySelectorAll('.dropdown-container');
+
+        dropdownContainers.forEach(container => {
+            const trigger = container.querySelector('.dropdown-trigger');
+            const dropdown = container.querySelector('.dropdown-menu');
+
+            if (!trigger || !dropdown) return;
+
+            let hoverTimeout;
+
+            // Mouse enter on container
+            container.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimeout);
+
+                // Close other dropdowns first
+                this.closeAllDropdowns();
+
+                // Small delay before opening
+                hoverTimeout = setTimeout(() => {
+                    const dropdownId = dropdown.id;
+                    if (dropdownId) {
+                        this.openDropdown(dropdownId);
+                        this.adjustDropdownPosition(dropdown);
+                    }
+                }, 150);
+            });
+
+            // Mouse leave on container
+            container.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+
+                // Delay before closing to allow moving to dropdown
+                hoverTimeout = setTimeout(() => {
+                    const dropdownId = dropdown.id;
+                    if (dropdownId) {
+                        this.closeDropdown(dropdownId);
+                    }
+                }, 300);
+            });
+        });
+
+        // Listen for sidebar hover changes to adjust dropdown positions
+        const verticalNav = document.getElementById('verticalNav');
+        if (verticalNav) {
+            verticalNav.addEventListener('mouseenter', () => {
+                this.adjustAllDropdownPositions(true);
+            });
+
+            verticalNav.addEventListener('mouseleave', () => {
+                this.adjustAllDropdownPositions(false);
+            });
+        }
+    },
+
+    // Adjust dropdown position based on sidebar state
+    adjustDropdownPosition(dropdown) {
+        if (!dropdown) return;
+
+        const dropdownId = dropdown.id;
+        if (dropdownId === 'mensDropdown' || dropdownId === 'womensDropdown') {
+            const verticalNav = document.getElementById('verticalNav');
+            const isHovered = verticalNav && verticalNav.matches(':hover');
+            const leftPosition = isHovered ? '220px' : '60px';
+            dropdown.style.left = leftPosition;
+        }
+    },
+
+    // Adjust all dropdown positions when sidebar state changes
+    adjustAllDropdownPositions(sidebarExpanded) {
+        const mensDropdown = document.getElementById('mensDropdown');
+        const womensDropdown = document.getElementById('womensDropdown');
+
+        const leftPosition = sidebarExpanded ? '220px' : '60px';
+
+        if (mensDropdown) {
+            mensDropdown.style.left = leftPosition;
+        }
+        if (womensDropdown) {
+            womensDropdown.style.left = leftPosition;
         }
     },
 

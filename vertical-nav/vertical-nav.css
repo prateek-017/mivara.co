@@ -60,6 +60,19 @@
     gap: var(--spacing-md);
 }
 
+/* Animated underline effect for sidebar links - similar to topbar */
+.vertical-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #D1AE87; /* Mivara accent color */
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
 .vertical-nav-link .nav-icon {
     display: flex;
     align-items: center;
@@ -68,6 +81,7 @@
     height: 24px;
     flex-shrink: 0;
     font-size: 1rem;
+    color: #1C1C1C; /* Explicit black color for icons */
 }
 
 .vertical-nav-link .nav-text {
@@ -84,16 +98,27 @@
 
 /* Hover States Only - No Default Active States */
 .vertical-nav-link:hover {
-    background-color: #D1AE87; /* Mivara accent color */
-    color: #1C1C1C;
+    color: #1C1C1C; /* Keep original text color */
 }
 
 .vertical-nav-link:hover .nav-text {
-    color: #1C1C1C;
+    color: #D1AE87; /* Change text color to accent on hover */
 }
 
 .vertical-nav-link:hover .nav-icon {
-    color: #1C1C1C;
+    color: #1C1C1C; /* Keep original icon color */
+}
+
+/* Expand underline on hover */
+.vertical-nav-link:hover::after {
+    width: 80%;
+}
+
+/* Fade out effect when hover ends */
+.vertical-nav-link:not(:hover)::after {
+    width: 0;
+    opacity: 0;
+    transition: all 0.4s ease-out;
 }
 
 /* Remove default active states - only show on hover */
