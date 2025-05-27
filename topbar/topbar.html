@@ -1,0 +1,244 @@
+<!-- Topbar Navigation Component -->
+<nav class="topbar">
+    <div class="topbar-container">
+        <!-- Left Section: Logo -->
+        <div class="topbar-left">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="/" class="logo-link">
+                    <span class="logo-text">Mivara</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Center Section: Navigation Menu -->
+        <div class="topbar-center">
+            <ul class="nav-menu">
+                <!-- Home -->
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+
+                <!-- Top Collections Dropdown -->
+                <li class="nav-item dropdown-container">
+                    <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('topCollectionsDropdown')">
+                        <span>Top Collections</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-menu" id="topCollectionsDropdown">
+                        <div class="dropdown-content">
+                            <div class="dropdown-column">
+                                <h4>Featured Collections</h4>
+                                <ul>
+                                    <li><a href="topbar/top-collections/streetwear.html">Streetwear</a></li>
+                                    <li><a href="topbar/top-collections/basics.html">Basics</a></li>
+                                    <li><a href="#">Vintage</a></li>
+                                    <li><a href="#">Premium</a></li>
+                                    <li><a href="#">Limited Edition</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Men's Collection Mega Dropdown -->
+                <li class="nav-item dropdown-container mega-dropdown">
+                    <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('mensDropdown')">
+                        <span>Men's Collection</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-menu mega-menu" id="mensDropdown">
+                        <div class="mega-content">
+                            <!-- Topwear Column -->
+                            <div class="mega-column">
+                                <h4>Topwear</h4>
+                                <ul>
+                                    <li><a href="#">All T-Shirts</a></li>
+                                    <li><a href="#">Oversized T-Shirts</a></li>
+                                    <li><a href="#">Shirts</a></li>
+                                    <li><a href="#">Half Sleeve</a></li>
+                                    <li><a href="#">Printed</a></li>
+                                    <li><a href="#">Plain</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Bottomwear Column -->
+                            <div class="mega-column">
+                                <h4>Bottomwear</h4>
+                                <ul>
+                                    <li><a href="#">Joggers</a></li>
+                                    <li><a href="#">Trousers & Pants</a></li>
+                                    <li><a href="#">Jeans</a></li>
+                                    <li><a href="#">Shorts</a></li>
+                                    <li><a href="#">Pajamas</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Footwear Column -->
+                            <div class="mega-column">
+                                <h4>Footwear</h4>
+                                <ul>
+                                    <li><a href="#">Sneakers</a></li>
+                                    <li><a href="#">Sliders</a></li>
+                                    <li><a href="#">Casual Shoes</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Accessories Column -->
+                            <div class="mega-column">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="#">Backpacks</a></li>
+                                    <li><a href="#">Sunglasses</a></li>
+                                    <li><a href="#">Caps</a></li>
+                                    <li><a href="#">Mobile Covers</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Specials Section -->
+                            <div class="mega-specials">
+                                <h4>Specials</h4>
+                                <div class="specials-grid">
+                                    <div class="special-item">
+                                        <div class="special-icon">🦸</div>
+                                        <span>Superman</span>
+                                    </div>
+                                    <div class="special-item">
+                                        <div class="special-icon">🍃</div>
+                                        <span>Naruto</span>
+                                    </div>
+                                    <div class="special-item">
+                                        <div class="special-icon">🛡️</div>
+                                        <span>Captain America</span>
+                                    </div>
+                                    <div class="special-item">
+                                        <div class="special-icon">💧</div>
+                                        <span>The Acid Wash Drip</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Women's Collection Mega Dropdown -->
+                <li class="nav-item dropdown-container mega-dropdown">
+                    <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('womensDropdown')">
+                        <span>Women's Collection</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-menu mega-menu" id="womensDropdown">
+                        <div class="mega-content">
+                            <!-- Topwear Column -->
+                            <div class="mega-column">
+                                <h4>Topwear</h4>
+                                <ul>
+                                    <li><a href="#">All T-Shirts</a></li>
+                                    <li><a href="#">Crop Tops</a></li>
+                                    <li><a href="#">Off-Shoulder Tops</a></li>
+                                    <li><a href="#">Tank Tops</a></li>
+                                    <li><a href="#">Printed</a></li>
+                                    <li><a href="#">Plain</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Bottomwear Column -->
+                            <div class="mega-column">
+                                <h4>Bottomwear</h4>
+                                <ul>
+                                    <li><a href="#">Joggers</a></li>
+                                    <li><a href="#">Leggings</a></li>
+                                    <li><a href="#">Jeans</a></li>
+                                    <li><a href="#">Shorts</a></li>
+                                    <li><a href="#">Skirts</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Footwear Column -->
+                            <div class="mega-column">
+                                <h4>Footwear</h4>
+                                <ul>
+                                    <li><a href="#">Sneakers</a></li>
+                                    <li><a href="#">Sliders</a></li>
+                                    <li><a href="#">Casual Shoes</a></li>
+                                    <li><a href="#">Heels</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Accessories Column -->
+                            <div class="mega-column">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="#">Handbags</a></li>
+                                    <li><a href="#">Sunglasses</a></li>
+                                    <li><a href="#">Jewelry</a></li>
+                                    <li><a href="#">Hair Accessories</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Specials Section -->
+                            <div class="mega-specials">
+                                <h4>Specials</h4>
+                                <div class="specials-grid">
+                                    <div class="special-item">
+                                        <div class="special-icon">🌸</div>
+                                        <span>Floral Collection</span>
+                                    </div>
+                                    <div class="special-item">
+                                        <div class="special-icon">✨</div>
+                                        <span>Sparkle Series</span>
+                                    </div>
+                                    <div class="special-item">
+                                        <div class="special-icon">🌙</div>
+                                        <span>Night Vibes</span>
+                                    </div>
+                                    <div class="special-item">
+                                        <div class="special-icon">🎨</div>
+                                        <span>Artist Edition</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <!-- Right Section: Search, Cart, Login -->
+        <div class="topbar-right">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
+                <button class="search-btn" onclick="MivaraApp.handleSearch(document.getElementById('searchInput').value)">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Profile -->
+            <div class="profile-container">
+                <a href="/dashboard/profile.html" class="profile-link">
+                    <div class="profile-info">
+                        <i class="fas fa-user profile-icon"></i>
+                        <span class="profile-name">John Doe</span>
+                    </div>
+                    <i class="fas fa-chevron-right profile-arrow"></i>
+                </a>
+            </div>
+
+            <!-- Cart -->
+            <div class="cart-container">
+                <a href="#" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</nav>

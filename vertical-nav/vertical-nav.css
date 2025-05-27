@@ -1,0 +1,345 @@
+/*
+ * Enhanced Expandable Sidebar Styles
+ * Mivara Theme with smooth hover expansion
+ */
+
+.vertical-nav {
+    position: fixed;
+    top: 60px; /* Start below topbar only */
+    left: 0;
+    width: 60px;
+    height: calc(100vh - 60px);
+    background-color: var(--bg-primary); /* Match topbar background */
+    border-right: 1px solid var(--border-primary); /* Match topbar border */
+    z-index: 999; /* Below topbar */
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md) 0; /* Reduced from var(--spacing-lg) */
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    box-shadow: 0 0 0 rgba(209, 174, 135, 0); /* Invisible shadow initially */
+}
+
+.vertical-nav:hover {
+    width: 220px; /* Expand on hover */
+    background-color: #F7F7F7;
+    box-shadow: 0 4px 20px rgba(209, 174, 135, 0.15); /* Mivara accent glow */
+}
+
+/* Vertical Nav Items */
+.vertical-nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* Reduced from var(--spacing-xs) */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    flex: 1;
+}
+
+.vertical-nav-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px; /* Reduced from var(--spacing-xs) */
+    padding: 0 var(--spacing-sm);
+}
+
+.vertical-nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    color: #1C1C1C; /* Mivara primary text */
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease-in-out;
+    font-size: 1rem;
+    position: relative;
+    padding: 0 var(--spacing-sm);
+    gap: var(--spacing-md);
+}
+
+.vertical-nav-link .nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.vertical-nav-link .nav-text {
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-20px); /* Start further left for slide-right effect */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition-delay: 0s; /* No delay by default */
+    white-space: nowrap;
+    color: #1C1C1C;
+}
+
+/* Hover States Only - No Default Active States */
+.vertical-nav-link:hover {
+    background-color: #D1AE87; /* Mivara accent color */
+    color: #1C1C1C;
+}
+
+.vertical-nav-link:hover .nav-text {
+    color: #1C1C1C;
+}
+
+.vertical-nav-link:hover .nav-icon {
+    color: #1C1C1C;
+}
+
+/* Remove default active states - only show on hover */
+
+/* Show text labels when sidebar is hovered or force-expanded - with staggered delay */
+.vertical-nav:hover .nav-text,
+.vertical-nav.force-expanded .nav-text {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.4s; /* Delay text animation until sidebar is mostly expanded */
+}
+
+/* Staggered animation for individual nav items */
+.vertical-nav:hover .vertical-nav-item:nth-child(1) .nav-text,
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(1) .nav-text {
+    transition-delay: 0.4s;
+}
+
+.vertical-nav:hover .vertical-nav-item:nth-child(2) .nav-text,
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(2) .nav-text {
+    transition-delay: 0.45s;
+}
+
+.vertical-nav:hover .vertical-nav-item:nth-child(3) .nav-text,
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(3) .nav-text {
+    transition-delay: 0.5s;
+}
+
+.vertical-nav:hover .vertical-nav-item:nth-child(4) .nav-text,
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(4) .nav-text {
+    transition-delay: 0.55s;
+}
+
+.vertical-nav:hover .vertical-nav-item:nth-child(6) .nav-text, /* Settings */
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(6) .nav-text {
+    transition-delay: 0.6s;
+}
+
+.vertical-nav:hover .vertical-nav-item:nth-child(7) .nav-text, /* Switch Accounts */
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(7) .nav-text {
+    transition-delay: 0.65s;
+}
+
+.vertical-nav:hover .vertical-nav-item:nth-child(8) .nav-text, /* Help & Support */
+.vertical-nav.force-expanded .vertical-nav-item:nth-child(8) .nav-text {
+    transition-delay: 0.7s;
+}
+
+/* User Avatar Section */
+.vertical-nav-avatar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    margin-bottom: var(--spacing-md); /* Reduced from var(--spacing-lg) */
+    padding: 0 var(--spacing-sm);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-radius: var(--radius-md);
+    gap: var(--spacing-md);
+}
+
+.vertical-nav-avatar:hover {
+    background-color: #D1AE87;
+}
+
+.vertical-nav-avatar .avatar-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #D1AE87;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1C1C1C;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.vertical-nav-avatar .avatar-text {
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1C1C1C;
+    opacity: 0;
+    transform: translateX(-20px); /* Start further left for slide-right effect */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition-delay: 0s; /* No delay by default */
+    white-space: nowrap;
+}
+
+.vertical-nav:hover .avatar-text,
+.vertical-nav.force-expanded .avatar-text {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.3s; /* Avatar text appears slightly earlier */
+}
+
+/* Divider */
+.vertical-nav-divider {
+    width: 30px;
+    height: 1px;
+    background-color: #E4E4E7; /* Mivara theme border */
+    margin: var(--spacing-sm) auto; /* Reduced from var(--spacing-md) */
+    transition: width 0.3s ease-out;
+    transition-delay: 0s; /* No delay by default */
+}
+
+.vertical-nav:hover .vertical-nav-divider {
+    width: 180px; /* Expand divider when sidebar is hovered */
+    transition-delay: 0.2s; /* Divider expands after sidebar starts expanding */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .vertical-nav:hover {
+        width: 200px; /* Smaller expansion on tablets */
+    }
+
+    .vertical-nav:hover .vertical-nav-divider {
+        width: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vertical-nav {
+        top: 50px; /* Topbar (50px) for mobile */
+        height: calc(100vh - 50px);
+        width: 50px;
+    }
+
+    .vertical-nav:hover {
+        width: 180px; /* Even smaller expansion on mobile */
+    }
+
+    .vertical-nav:hover .vertical-nav-divider {
+        width: 140px;
+    }
+
+    .vertical-nav-link {
+        height: 40px; /* Maintain proportional height on mobile */
+        font-size: 0.9rem;
+        padding: 0 var(--spacing-xs);
+    }
+
+    .vertical-nav-avatar {
+        height: 40px;
+        padding: 0 var(--spacing-xs);
+    }
+
+    .vertical-nav-avatar .avatar-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .nav-text, .avatar-text {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .vertical-nav {
+        top: 60px; /* Topbar (60px) for small mobile */
+        height: calc(100vh - 60px);
+    }
+}
+
+/* Animation for nav items */
+.vertical-nav-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInLeft 0.3s ease forwards;
+}
+
+.vertical-nav-item:nth-child(1) { animation-delay: 0.1s; }
+.vertical-nav-item:nth-child(2) { animation-delay: 0.15s; }
+.vertical-nav-item:nth-child(3) { animation-delay: 0.2s; }
+.vertical-nav-item:nth-child(4) { animation-delay: 0.25s; }
+.vertical-nav-item:nth-child(5) { animation-delay: 0.3s; }
+.vertical-nav-item:nth-child(6) { animation-delay: 0.35s; }
+.vertical-nav-item:nth-child(7) { animation-delay: 0.4s; }
+.vertical-nav-item:nth-child(8) { animation-delay: 0.45s; }
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Bottom Section */
+.vertical-nav-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--spacing-sm) var(--spacing-sm); /* Reduced bottom padding from var(--spacing-lg) */
+    width: 100%;
+}
+
+/* Logout button styling */
+.vertical-nav-logout {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    color: #dc3545 !important;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease-in-out;
+    padding: 0 var(--spacing-sm);
+    gap: var(--spacing-md);
+}
+
+.vertical-nav-logout:hover {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+    color: #dc3545 !important;
+}
+
+.vertical-nav-logout .nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.vertical-nav-logout .nav-text {
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-20px); /* Start further left for slide-right effect */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition-delay: 0s; /* No delay by default */
+    white-space: nowrap;
+    color: #dc3545;
+}
+
+.vertical-nav:hover .vertical-nav-logout .nav-text,
+.vertical-nav.force-expanded .vertical-nav-logout .nav-text {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.5s; /* Logout text appears last */
+}
+
+
