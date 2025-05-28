@@ -85,6 +85,53 @@ h4 { font-size: 1.5rem; }
 h5 { font-size: 1.25rem; }
 h6 { font-size: 1rem; }
 
+/* Hero Art Text - Override all other styles */
+.hero-right-text .hero-art-text,
+.hero-art-text {
+    font-family: var(--font-heading) !important;
+    font-size: 2.5rem !important;
+    font-weight: 300 !important;
+    color: var(--text-primary) !important;
+    margin: 0 0 var(--spacing-lg) 0 !important;
+    line-height: 0.9 !important;
+    letter-spacing: 1px !important;
+    font-style: italic !important;
+    text-align: right !important;
+    padding: 0 !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-transform: lowercase !important;
+}
+
+/* Feature Icons - Black Color */
+.feature-icon {
+    color: #000000 !important;
+    font-weight: bold !important;
+    font-size: 1rem !important;
+}
+
+/* Hero Right Text Container - Reduce padding for single line features */
+.hero-right-text {
+    padding-right: var(--spacing-sm) !important;
+    max-width: none !important;
+    width: auto !important;
+}
+
+/* Feature Items - Ensure single line display with left alignment */
+.hero-features {
+    text-align: left !important;
+}
+
+.hero-features .feature-item {
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: var(--spacing-xs) !important;
+    margin-bottom: var(--spacing-xs) !important;
+    text-align: left !important;
+}
+
 p {
     margin-bottom: var(--spacing-md);
 }
