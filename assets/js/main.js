@@ -13,21 +13,12 @@ const MivaraApp = {
     init() {
         this.setupEventListeners();
         this.handleResize();
-        console.log('Mivara.co initialized successfully');
     },
 
     // Set up global event listeners
     setupEventListeners() {
         // Window resize handler
         window.addEventListener('resize', () => this.handleResize());
-
-        // Mobile overlay click handler
-        const overlay = document.getElementById('mobileOverlay');
-        if (overlay) {
-            overlay.addEventListener('click', () => {
-                // Handle overlay click if needed
-            });
-        }
 
         // Escape key handler for closing dropdowns
         document.addEventListener('keydown', (e) => {
@@ -92,6 +83,25 @@ const MivaraApp = {
     // Setup topbar dropdown hover functionality
     setupTopbarDropdownHover() {
         const dropdownContainers = document.querySelectorAll('.dropdown-container');
+        let currentHoverTimeout = null;
+        let currentCloseTimeout = null;
+        let isTransitioning = false;
+        let lastHoveredContainer = null;
+        // Add hover detection to the entire topbar
+        const topbar = document.querySelector('.topbar-center');
+        if (topbar) {
+            topbar.addEventListener('mouseleave', () => {
+                // Close all dropdowns when leaving the entire navigation area
+                if (currentCloseTimeout) {
+                    clearTimeout(currentCloseTimeout);
+                }
+                currentCloseTimeout = setTimeout(() => {
+                    this.closeAllDropdowns();
+                    lastHoveredContainer = null;
+                    currentCloseTimeout = null;
+                }, 300);
+            });
+        }
 
         dropdownContainers.forEach(container => {
             const trigger = container.querySelector('.dropdown-trigger');
@@ -99,36 +109,93 @@ const MivaraApp = {
 
             if (!trigger || !dropdown) return;
 
-            let hoverTimeout;
-
             // Mouse enter on container
             container.addEventListener('mouseenter', () => {
-                clearTimeout(hoverTimeout);
+                // Prevent rapid triggering during mouse transitions
+                if (isTransitioning) return;
 
-                // Close other dropdowns first
-                this.closeAllDropdowns();
+                // If this is the same container as last hovered, ignore
+                if (lastHoveredContainer === container) return;
 
-                // Small delay before opening
-                hoverTimeout = setTimeout(() => {
-                    const dropdownId = dropdown.id;
-                    if (dropdownId) {
-                        this.openDropdown(dropdownId);
-                        this.adjustDropdownPosition(dropdown);
+                // Clear any existing timeouts
+                if (currentHoverTimeout) {
+                    clearTimeout(currentHoverTimeout);
+                    currentHoverTimeout = null;
+                }
+                if (currentCloseTimeout) {
+                    clearTimeout(currentCloseTimeout);
+                    currentCloseTimeout = null;
+                }
+
+                // Add delay to prevent accidental triggers when moving between nav items
+                currentHoverTimeout = setTimeout(() => {
+                    // Check if mouse is still over the container
+                    if (container.matches(':hover') && !isTransitioning) {
+                        isTransitioning = true;
+                        lastHoveredContainer = container;
+
+                        // Close other dropdowns immediately for smooth transition
+                        this.closeAllDropdowns();
+
+                        // Open the dropdown
+                        const dropdownId = dropdown.id;
+                        if (dropdownId) {
+                            this.openDropdown(dropdownId);
+                            this.adjustDropdownPosition(dropdown);
+                        }
+
+                        // Reset transition flag after animation
+                        setTimeout(() => {
+                            isTransitioning = false;
+                        }, 300);
                     }
-                }, 150);
+                    currentHoverTimeout = null;
+                }, 150); // Reasonable delay to prevent accidental triggers
             });
 
             // Mouse leave on container
             container.addEventListener('mouseleave', () => {
-                clearTimeout(hoverTimeout);
+                // Clear any existing timeouts
+                if (currentHoverTimeout) {
+                    clearTimeout(currentHoverTimeout);
+                    currentHoverTimeout = null;
+                }
+                if (currentCloseTimeout) {
+                    clearTimeout(currentCloseTimeout);
+                    currentCloseTimeout = null;
+                }
 
-                // Delay before closing to allow moving to dropdown
-                hoverTimeout = setTimeout(() => {
+                // Short delay before closing to allow moving to dropdown
+                currentCloseTimeout = setTimeout(() => {
+                    const dropdownId = dropdown.id;
+                    if (dropdownId && !dropdown.matches(':hover')) {
+                        this.closeDropdown(dropdownId);
+                    }
+                    currentCloseTimeout = null;
+                }, 200);
+            });
+
+            // Keep dropdown open when hovering over the dropdown itself
+            dropdown.addEventListener('mouseenter', () => {
+                if (currentCloseTimeout) {
+                    clearTimeout(currentCloseTimeout);
+                    currentCloseTimeout = null;
+                }
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+                if (currentCloseTimeout) {
+                    clearTimeout(currentCloseTimeout);
+                    currentCloseTimeout = null;
+                }
+
+                currentCloseTimeout = setTimeout(() => {
                     const dropdownId = dropdown.id;
                     if (dropdownId) {
                         this.closeDropdown(dropdownId);
                     }
-                }, 300);
+                    currentCloseTimeout = null;
+                }, 200);
             });
         });
 
@@ -192,24 +259,7 @@ const MivaraApp = {
 
 
 
-    // Toggle dropdown menu
-    toggleDropdown(dropdownId) {
-        const dropdown = document.getElementById(dropdownId);
-        if (!dropdown) return;
 
-        // Close other dropdowns
-        if (this.currentDropdown && this.currentDropdown !== dropdownId) {
-            this.closeDropdown(this.currentDropdown);
-        }
-
-        const isOpen = dropdown.classList.contains('open');
-
-        if (isOpen) {
-            this.closeDropdown(dropdownId);
-        } else {
-            this.openDropdown(dropdownId);
-        }
-    },
 
     // Open specific dropdown
     openDropdown(dropdownId) {
@@ -243,28 +293,20 @@ const MivaraApp = {
     // Search functionality
     handleSearch(query) {
         if (!query.trim()) return;
-
-        console.log('Searching for:', query);
         // TODO: Implement search functionality
         // This will be connected to product filtering later
     },
 
     // Add to cart functionality
     addToCart(productId, quantity = 1) {
-        console.log(`Adding product ${productId} to cart (quantity: ${quantity})`);
         // TODO: Implement cart functionality
         // This will be connected to cart management later
-
-        // Show success message (temporary)
         this.showNotification('Product added to cart!', 'success');
     },
 
     // Add to wishlist functionality
     addToWishlist(productId) {
-        console.log(`Adding product ${productId} to wishlist`);
         // TODO: Implement wishlist functionality
-
-        // Show success message (temporary)
         this.showNotification('Product added to wishlist!', 'success');
     },
 
@@ -289,79 +331,6 @@ const MivaraApp = {
     }
 };
 
-/**
- * Component loader function
- * Loads HTML components into specified containers
- */
-async function loadComponent(componentPath, containerId) {
-    try {
-        const response = await fetch(componentPath);
-        if (!response.ok) {
-            throw new Error(`Failed to load ${componentPath}: ${response.status}`);
-        }
-
-        const html = await response.text();
-        const container = document.getElementById(containerId);
-
-        if (container) {
-            container.innerHTML = html;
-            console.log(`Component ${componentPath} loaded successfully`);
-        } else {
-            console.error(`Container ${containerId} not found`);
-        }
-    } catch (error) {
-        console.error(`Error loading component ${componentPath}:`, error);
-
-        // Show fallback content
-        const container = document.getElementById(containerId);
-        if (container) {
-            container.innerHTML = `<div class="error-message">Failed to load ${componentPath}</div>`;
-        }
-    }
-}
-
-/**
- * Utility functions
- */
-const Utils = {
-    // Format price with currency
-    formatPrice(price, currency = '₹') {
-        return `${currency}${price.toLocaleString()}`;
-    },
-
-    // Calculate discount percentage
-    calculateDiscount(originalPrice, discountedPrice) {
-        return Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
-    },
-
-    // Debounce function for search
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    },
-
-    // Throttle function for scroll events
-    throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-};
-
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     MivaraApp.init();
@@ -369,5 +338,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Make functions globally available
 window.MivaraApp = MivaraApp;
-window.Utils = Utils;
-window.loadComponent = loadComponent;

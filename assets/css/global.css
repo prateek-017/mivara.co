@@ -213,46 +213,6 @@ a:hover {
 
 /* Content adjustment will be handled by JavaScript */
 
-/* Utility Classes */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.d-flex { display: flex; }
-.d-grid { display: grid; }
-.d-none { display: none; }
-.d-block { display: block; }
-
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.justify-start { justify-content: flex-start; }
-.justify-end { justify-content: flex-end; }
-
-.align-center { align-items: center; }
-.align-start { align-items: flex-start; }
-.align-end { align-items: flex-end; }
-
-.gap-xs { gap: var(--spacing-xs); }
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing-md); }
-.gap-lg { gap: var(--spacing-lg); }
-
-/* Mobile Overlay */
-.mobile-overlay {
-    display: none;
-    position: fixed;
-    top: 60px; /* Start below topbar */
-    left: 60px; /* Start after vertical nav */
-    width: calc(100% - 60px);
-    height: calc(100vh - 60px);
-    background-color: var(--overlay);
-    z-index: 998; /* Below sidebar */
-}
-
-.mobile-overlay.active {
-    display: block;
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
     .main-content {
@@ -287,12 +247,7 @@ a:hover {
         width: calc(100% - 50px);
     }
 
-    .mobile-overlay {
-        top: 50px; /* Topbar (50px) for mobile */
-        left: 50px; /* Start after smaller vertical nav */
-        width: calc(100% - 50px);
-        height: calc(100vh - 50px);
-    }
+
 
     h1 { font-size: 2rem; }
     h2 { font-size: 1.75rem; }
@@ -300,15 +255,6 @@ a:hover {
 
     .container {
         padding: 0 var(--spacing-sm);
-    }
-}
-
-@media (max-width: 480px) {
-    .mobile-overlay {
-        top: 60px; /* Topbar (60px) for small mobile */
-        left: 50px; /* Start after vertical nav */
-        width: calc(100% - 50px);
-        height: calc(100vh - 60px);
     }
 }
 

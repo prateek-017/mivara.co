@@ -207,7 +207,7 @@ class VerticalNav {
                 }, 1000);
                 break;
             default:
-                console.log('Navigation to:', target);
+                // Handle other navigation targets
         }
     }
 

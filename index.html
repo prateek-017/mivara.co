@@ -104,14 +104,17 @@
 
                     <!-- Top Collections Dropdown -->
                     <li class="nav-item dropdown-container">
-                        <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('topCollectionsDropdown')">
+                        <a href="#" class="nav-link dropdown-trigger">
                             <span>Top Collections</span>
                             <i class="fas fa-chevron-down dropdown-icon"></i>
                         </a>
                         <div class="dropdown-menu" id="topCollectionsDropdown">
                             <div class="dropdown-content">
                                 <div class="dropdown-column">
-                                    <h4>Featured Collections</h4>
+                                    <h4>
+                                        <i class="fas fa-trophy hero-icon"></i>
+                                        Featured Collections
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Streetwear</a></li>
                                         <li><a href="#">Basics</a></li>
@@ -126,15 +129,19 @@
 
                     <!-- Men's Collection Mega Dropdown -->
                     <li class="nav-item dropdown-container mega-dropdown">
-                        <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('mensDropdown')">
+                        <a href="#" class="nav-link dropdown-trigger">
                             <span>Men's Collection</span>
                             <i class="fas fa-chevron-down dropdown-icon"></i>
                         </a>
                         <div class="dropdown-menu mega-menu" id="mensDropdown">
                             <div class="mega-content">
-                                <!-- Topwear Column -->
-                                <div class="mega-column">
-                                    <h4>Topwear</h4>
+                                <div class="mega-columns">
+                                    <!-- Topwear Column -->
+                                    <div class="mega-column">
+                                    <h4>
+                                        <i class="fas fa-tshirt category-icon"></i>
+                                        Topwear
+                                    </h4>
                                     <ul>
                                         <li><a href="#">All T-Shirts</a></li>
                                         <li><a href="#">Oversized T-Shirts</a></li>
@@ -147,7 +154,10 @@
 
                                 <!-- Bottomwear Column -->
                                 <div class="mega-column">
-                                    <h4>Bottomwear</h4>
+                                    <h4>
+                                        <i class="fas fa-user-tie category-icon"></i>
+                                        Bottomwear
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Joggers</a></li>
                                         <li><a href="#">Trousers & Pants</a></li>
@@ -159,7 +169,10 @@
 
                                 <!-- Footwear Column -->
                                 <div class="mega-column">
-                                    <h4>Footwear</h4>
+                                    <h4>
+                                        <i class="fas fa-shoe-prints category-icon"></i>
+                                        Footwear
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Sneakers</a></li>
                                         <li><a href="#">Sliders</a></li>
@@ -169,7 +182,10 @@
 
                                 <!-- Accessories Column -->
                                 <div class="mega-column">
-                                    <h4>Accessories</h4>
+                                    <h4>
+                                        <i class="fas fa-glasses category-icon"></i>
+                                        Accessories
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Backpacks</a></li>
                                         <li><a href="#">Sunglasses</a></li>
@@ -180,41 +196,76 @@
 
                                 <!-- Specials Section -->
                                 <div class="mega-specials">
-                                    <h4>Specials</h4>
+                                    <h4>
+                                        <i class="fas fa-star category-icon"></i>
+                                        Specials
+                                    </h4>
                                     <div class="specials-grid">
                                         <div class="special-item">
-                                            <div class="special-icon">🦸</div>
-                                            <span>Superman</span>
+                                            <div class="special-avatar">S</div>
+                                            <div class="special-info">
+                                                <h5>Superman</h5>
+                                            </div>
                                         </div>
                                         <div class="special-item">
-                                            <div class="special-icon">🍃</div>
-                                            <span>Naruto</span>
+                                            <div class="special-avatar">N</div>
+                                            <div class="special-info">
+                                                <h5>Naruto</h5>
+                                            </div>
                                         </div>
                                         <div class="special-item">
-                                            <div class="special-icon">🛡️</div>
-                                            <span>Captain America</span>
+                                            <div class="special-avatar">C</div>
+                                            <div class="special-info">
+                                                <h5>Captain America</h5>
+                                            </div>
                                         </div>
                                         <div class="special-item">
-                                            <div class="special-icon">💧</div>
-                                            <span>The Acid Wash Drip</span>
+                                            <div class="special-avatar">A</div>
+                                            <div class="special-info">
+                                                <h5>The Acid Wash Drip</h5>
+                                            </div>
                                         </div>
                                     </div>
+                                    </div>
                                 </div>
+
+                                <!-- Special Section -->
+                                <div class="mega-special-section">
+                                    <div class="mega-special-content">
+                                        <h4>
+                                            <i class="fas fa-star category-icon"></i>
+                                            Featured Collection
+                                        </h4>
+                                        <p>Discover our latest premium designs crafted with the finest materials and attention to detail.</p>
+                                    </div>
+                                    <a href="#" class="mega-special-btn">
+                                        Explore Now
+                                        <svg class="mega-special-btn-icon" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+
+
                             </div>
                         </div>
                     </li>
 
                     <!-- Women's Collection Mega Dropdown -->
                     <li class="nav-item dropdown-container mega-dropdown">
-                        <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('womensDropdown')">
+                        <a href="#" class="nav-link dropdown-trigger">
                             <span>Women's Collection</span>
                             <i class="fas fa-chevron-down dropdown-icon"></i>
                         </a>
                         <div class="dropdown-menu mega-menu" id="womensDropdown">
                             <div class="mega-content">
-                                <!-- Topwear Column -->
-                                <div class="mega-column">
-                                    <h4>Topwear</h4>
+                                <div class="mega-columns">
+                                    <!-- Topwear Column -->
+                                    <div class="mega-column">
+                                    <h4>
+                                        <i class="fas fa-tshirt category-icon"></i>
+                                        Topwear
+                                    </h4>
                                     <ul>
                                         <li><a href="#">All T-Shirts</a></li>
                                         <li><a href="#">Crop Tops</a></li>
@@ -227,7 +278,10 @@
 
                                 <!-- Bottomwear Column -->
                                 <div class="mega-column">
-                                    <h4>Bottomwear</h4>
+                                    <h4>
+                                        <i class="fas fa-user-tie category-icon"></i>
+                                        Bottomwear
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Joggers</a></li>
                                         <li><a href="#">Leggings</a></li>
@@ -239,7 +293,10 @@
 
                                 <!-- Footwear Column -->
                                 <div class="mega-column">
-                                    <h4>Footwear</h4>
+                                    <h4>
+                                        <i class="fas fa-shoe-prints category-icon"></i>
+                                        Footwear
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Sneakers</a></li>
                                         <li><a href="#">Sliders</a></li>
@@ -250,7 +307,10 @@
 
                                 <!-- Accessories Column -->
                                 <div class="mega-column">
-                                    <h4>Accessories</h4>
+                                    <h4>
+                                        <i class="fas fa-glasses category-icon"></i>
+                                        Accessories
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Handbags</a></li>
                                         <li><a href="#">Sunglasses</a></li>
@@ -261,40 +321,74 @@
 
                                 <!-- Specials Section -->
                                 <div class="mega-specials">
-                                    <h4>Specials</h4>
+                                    <h4>
+                                        <i class="fas fa-star category-icon"></i>
+                                        Specials
+                                    </h4>
                                     <div class="specials-grid">
                                         <div class="special-item">
-                                            <div class="special-icon">🌸</div>
-                                            <span>Floral Collection</span>
+                                            <div class="special-avatar">F</div>
+                                            <div class="special-info">
+                                                <h5>Floral Collection</h5>
+                                            </div>
                                         </div>
                                         <div class="special-item">
-                                            <div class="special-icon">✨</div>
-                                            <span>Sparkle Series</span>
+                                            <div class="special-avatar">S</div>
+                                            <div class="special-info">
+                                                <h5>Sparkle Series</h5>
+                                            </div>
                                         </div>
                                         <div class="special-item">
-                                            <div class="special-icon">🌙</div>
-                                            <span>Night Vibes</span>
+                                            <div class="special-avatar">N</div>
+                                            <div class="special-info">
+                                                <h5>Night Vibes</h5>
+                                            </div>
                                         </div>
                                         <div class="special-item">
-                                            <div class="special-icon">🎨</div>
-                                            <span>Artist Edition</span>
+                                            <div class="special-avatar">A</div>
+                                            <div class="special-info">
+                                                <h5>Artist Edition</h5>
+                                            </div>
                                         </div>
                                     </div>
+                                    </div>
                                 </div>
+
+                                <!-- Special Section -->
+                                <div class="mega-special-section">
+                                    <div class="mega-special-content">
+                                        <h4>
+                                            <i class="fas fa-fire category-icon"></i>
+                                            Trending Now
+                                        </h4>
+                                        <p>Explore the most popular women's fashion pieces that are setting trends this season.</p>
+                                    </div>
+                                    <a href="#" class="mega-special-btn">
+                                        Shop Trends
+                                        <svg class="mega-special-btn-icon" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+
+
                             </div>
                         </div>
                     </li>
 
                     <!-- Mivara's Merch -->
                     <li class="nav-item dropdown-container">
-                        <a href="#" class="nav-link dropdown-trigger" onclick="MivaraApp.toggleDropdown('merchDropdown')">
+                        <a href="#" class="nav-link dropdown-trigger">
                             <span>Mivara's Merch</span>
                             <i class="fas fa-chevron-down dropdown-icon"></i>
                         </a>
                         <div class="dropdown-menu" id="merchDropdown">
                             <div class="dropdown-content">
                                 <div class="dropdown-column">
-                                    <h4>Official Merch</h4>
+                                    <h4>
+                                        <i class="fas fa-bullseye hero-icon"></i>
+                                        Official Merch
+                                    </h4>
                                     <ul>
                                         <li><a href="#">Mivara Logo Tees</a></li>
                                         <li><a href="#">Brand Hoodies</a></li>
