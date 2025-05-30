@@ -1,0 +1,117 @@
+mivara.co: an tshirt selling ecommerce site.
+homepage layout: top bar, side bar, footer(will do later)
+├── homepage
+│   ├── hero banner
+│   ├── best deals
+│   ├── trending this season
+│   ├──trending this season
+│   └──latest arrivals
+
+for product listing, or product listing card 
+the format should include image of product, name of product, discounted price, original pricw with a slash, discount %age type of deal( bestseller, new arrval, collection name etc), colour circles in which product is available
+
+header( logo on left, login/signup button on right)
+
+topbar: do not make it on a strip of dark colour make it look minimal should have hover effect d
+---home(1st thing, icon included)
+
+---top collections: a dropdown( has subpage names of many collections), 
+
+---mens collection: a dropdown
+
+---woman collection: a dropdown
+{On hover over "Men collection" or "Women collection", show a mega dropdown menu with 4 columns: Topwear, Bottomwear, Footwear, and Accessories.
+
+Each column must have a heading and list of clickable subcategories (links we will add later ).
+
+Add a "Specials" section on the right, with icons and names leave the section empty for now — you can use placeholder images or logos.
+
+Ensure the design is responsive and works on desktop and mobile.
+
+Use hover effects and subtle transitions for a modern feel.
+Category Example Content:for dropdown sections of men and woman collection
+
+Topwear: All T-Shirts, Oversized T-Shirts, Shirts, Half Sleeve, Printed, Plain
+
+Bottomwear: Joggers, Trousers & Pants, Jeans, Shorts, Pajamas
+
+Footwear: Sneakers, Sliders, Casual Shoes
+
+Accessories: Backpacks, Sunglasses, Caps, Mobile Covers
+
+Specials: Superman, Naruto, Captain America, The Acid Wash Drip
+custom designs}
+
+---official merch
+
+---search bar
+
+---cart with cart icon
+
+
+sidde bar:
+Vertical sidebar, collapsible on mobile
+
+_dashboard ( navigating to a profile page)
+-Wishlist
+-Orders(dropdown)active orders Past Orders
+-Special Collections / Themes
+-settings
+-switch accounts
+-logout button
+
+use colour pallet 
+Background: #F7F7F7 (Soft Grayish White)
+
+Primary Text: #1C1C1C (Deep Graphite Black)
+
+Accent: #D1AE87 (Warm Tan/Gold — adds class)
+
+Borders: #E4E4E7 (Light Cool Gray)
+
+CTA/Buttons: #242424 or #C0A97E (Matte Gold)
+Element	Font
+Logo/Brand:Poppins SemiBold or Epilogue Bold
+Headings:Satoshi, Epilogue, or Poppins
+Body Text:DM Sans or Inter
+Price/CTA:Urbanist Medium or Outfit 
+
+folder structure mivara-co/
+│
+├── index.html                <!-- Main entry file (you create later) -->
+│
+├── homepage/
+│   ├── homepage.html, css componnents html css 
+│
+├── sidebar/
+│   ├── sidebar.html, css componnents html css 
+├── topbar/
+│   ├── topbar.html
+│   ├── topbar.css
+│   ├── mens-collection/
+│   │   ├── polo-tees.html
+│   │   ├── slim-fit-shirt.html
+│   │   └── ...etc
+│   ├── women-collection/
+│   │   ├── crop-top.html
+│   │   ├── off-shoulder-top.html
+│   │   └── ...etc
+│   └── top-collections/
+│       ├── streetwear.html
+│       └── basics.html
+│
+├── footer/
+│   ├── footer.html
+│   └── footer.css
+│
+└── assets/
+    ├── images/
+    ├── icons/
+    └── fonts/
+
+techstak is java css html and https://www.pexels.com/
+https://pixabay.com/
+https://www.canva.com/features/free-stock-photos/
+
+tech stack is html css java
+make the website responsive for all format, do not leave any excess padding it should be minimal and clean looking, do not make icons tooo curvy radius shouldn't be too much 

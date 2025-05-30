@@ -16,7 +16,7 @@
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     margin-bottom: var(--spacing-xl);
     overflow: hidden;
     border: 1px solid var(--border-primary);
