@@ -99,30 +99,19 @@ class VerticalNav {
     }
 
     openSidebar() {
-        if (this.sidebar) {
-            this.sidebar.classList.add('open');
-        }
-
-        // Show overlay on mobile/tablet
-        if (window.innerWidth <= 1024 && this.mobileOverlay) {
+        // Sidebar now uses pure CSS hover - no JavaScript manipulation needed
+        // Only handle mobile overlay if needed
+        if (window.innerWidth <= 768 && this.mobileOverlay) {
             this.mobileOverlay.classList.add('active');
-        }
-
-        // Add class to body to prevent scrolling on mobile
-        if (window.innerWidth <= 768) {
             document.body.classList.add('sidebar-open');
         }
     }
 
     closeSidebar() {
-        if (this.sidebar) {
-            this.sidebar.classList.remove('open');
-        }
-
+        // Only handle mobile overlay cleanup
         if (this.mobileOverlay) {
             this.mobileOverlay.classList.remove('active');
         }
-
         document.body.classList.remove('sidebar-open');
     }
 
@@ -166,8 +155,7 @@ class VerticalNav {
         if (activeLink) {
             activeLink.classList.add('active');
         } else {
-            // Set default active link based on current page
-            const currentPath = window.location.pathname;
+            // Set default active link to dashboard
             const defaultLink = this.verticalNav.querySelector('.vertical-nav-link[href="#dashboard"]');
             if (defaultLink) {
                 defaultLink.classList.add('active');

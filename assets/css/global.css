@@ -239,26 +239,13 @@ a:hover {
     flex: 1;
     padding: 0;
     margin-left: 60px; /* Account for vertical nav bar */
-    transition: all 0.3s ease-in-out;
+    transition: none; /* Remove transition for overlay behavior */
     width: calc(100% - 60px);
     overflow-x: hidden; /* Prevent horizontal scroll during transitions */
     min-height: calc(100vh - 60px);
 }
 
-/* Sidebar expanded state classes */
-.main-content.sidebar-expanded {
-    margin-left: 220px;
-    width: calc(100% - 220px);
-}
-
-@media (max-width: 1024px) {
-    .main-content.sidebar-expanded {
-        margin-left: 200px;
-        width: calc(100% - 200px);
-    }
-}
-
-/* Content adjustment will be handled by JavaScript */
+/* Remove sidebar expanded state classes - sidebar will overlay instead of squeezing */
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -286,12 +273,6 @@ a:hover {
         padding: 0;
         width: calc(100% - 50px);
         min-height: calc(100vh - 50px);
-    }
-
-    /* Disable sidebar expansion on mobile */
-    .main-content.sidebar-expanded {
-        margin-left: 50px;
-        width: calc(100% - 50px);
     }
 
 
@@ -338,6 +319,8 @@ a:hover {
     background: var(--accent-primary);
 }
 
+
+
 /* Notification Styles */
 .notification {
     position: fixed;
@@ -378,3 +361,5 @@ a:hover {
 .notification-info {
     border-left-color: var(--accent-primary);
 }
+
+

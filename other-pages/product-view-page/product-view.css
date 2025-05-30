@@ -25,11 +25,10 @@
     z-index: 999;
 }
 
-/* Adjust main content for fixed navigation */
+/* Adjust main content for fixed navigation - overlay behavior */
 .main-container {
     margin-top: 80px;
-    margin-left: -40px;
-    transition: margin-left 0.3s ease;
+    /* Remove negative margin - sidebar now overlays instead of squeezing */
 }
 
 /* Cart animation styles */
@@ -84,10 +83,10 @@
     margin-top: 0; /* Topbar margin handled by main-container */
 }
 
-/* Product Main Section - Four Column Layout */
+/* Product Main Section - Three Column Layout */
 .product-main {
     display: grid;
-    grid-template-columns: 80px 1fr 400px 300px;
+    grid-template-columns: 80px 1fr 800px;
     gap: calc(var(--spacing-xl) * 0.25);
     margin-bottom: var(--spacing-2xl);
     max-width: 1400px;
@@ -144,8 +143,24 @@
 .product-details {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--spacing-sm) * 0.1);
+    justify-content: space-between;
+    gap: var(--spacing-lg);
     padding: 0;
+    height: 300px;
+}
+
+/* Top Section - Name and Brand */
+.product-top-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+/* Bottom Section - Delivery, Price, Color, Buttons */
+.product-bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
 .product-header {
@@ -225,13 +240,13 @@
 }
 
 .current-price {
-    font-size: var(--font-size-3xl);
+    font-size: 2.5rem;
     font-weight: var(--font-weight-bold);
     color: var(--text-primary);
 }
 
 .original-price {
-    font-size: var(--font-size-lg);
+    font-size: 1.2rem;
     color: var(--text-secondary);
     text-decoration: line-through;
 }
@@ -241,8 +256,43 @@
     color: white;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
-    font-size: var(--font-size-sm);
+    font-size: 1rem;
     font-weight: var(--font-weight-medium);
+}
+
+/* Trust Badges Section */
+.trust-badges {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-sm) 0;
+    padding: 0;
+}
+
+.trust-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    gap: var(--spacing-xs);
+}
+
+.trust-badge-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+.trust-badge-text {
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 .option-group {
@@ -306,12 +356,25 @@
     cursor: pointer;
     font-weight: 500;
     transition: all var(--transition-fast);
-    min-width: 35px;
-    height: 30px;
+    min-width: 60px;
+    height: 45px;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2px;
+}
+
+.size-option .size-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.size-option .size-price {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 .size-option.active {
@@ -328,11 +391,11 @@
 .action-buttons {
     display: flex;
     gap: var(--spacing-md);
-    margin-top: calc(var(--spacing-lg) * 0.1);
+    margin-top: calc(var(--spacing-lg) + 28px);
 }
 
 .btn-add-cart {
-    flex: 1;
+    flex: 0.5;
     background: var(--text-primary);
     color: var(--white);
     border: none;
@@ -346,7 +409,7 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
-    height: 35px;
+    height: 52px;
 }
 
 .btn-add-cart:hover {
@@ -355,7 +418,7 @@
 }
 
 .btn-buy-now {
-    flex: 1;
+    flex: 0.5;
     background: var(--accent-primary);
     color: var(--text-primary);
     border: none;
@@ -369,7 +432,7 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
-    height: 35px;
+    height: 52px;
 }
 
 .btn-buy-now:hover {
@@ -377,37 +440,7 @@
     transform: translateY(-1px);
 }
 
-/* Far Right Column - Product Details Panel */
-.product-details-panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    background: var(--white);
-    padding: var(--spacing-md);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-primary);
-    height: fit-content;
-    position: sticky;
-    top: 80px;
-}
-
-.panel-title {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--text-primary);
-    margin: 0 0 var(--spacing-md) 0;
-    border-bottom: 1px solid var(--border-primary);
-    padding-bottom: var(--spacing-sm);
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs);
-    background: var(--bg-primary);
-    border-radius: var(--radius-sm);
-}
+/* Product card styling removed - no longer needed */
 
 .detail-icon {
     width: 24px;

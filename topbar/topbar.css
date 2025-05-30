@@ -305,11 +305,12 @@
     min-width: 50vw; /* Cover 50% of viewport width for hero banner coverage */
     max-width: 60vw;
     min-height: 400px; /* Extend down to cover hero area */
-    will-change: opacity, transform, left;
+    will-change: opacity, transform;
     background: linear-gradient(135deg, #F7F7F7 0%, #FEFEFE 100%);
     border: 1px solid #E5E5E5;
     box-shadow: 0 12px 40px rgba(28, 28, 28, 0.08);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg); /* Rounded bottom corners */
+    z-index: 1002; /* Above sidebar when expanded */
 }
 
 #mensDropdown.open,
@@ -317,14 +318,7 @@
     transform: translateY(0);
 }
 
-/* Adjust position when sidebar is expanded (hovered) */
-.vertical-nav:hover ~ .topbar #mensDropdown,
-.vertical-nav:hover ~ .topbar #womensDropdown,
-body:has(.vertical-nav:hover) #mensDropdown,
-body:has(.vertical-nav:hover) #womensDropdown {
-    left: 220px; /* Position at the right edge of expanded sidebar */
-    transition: left 0.3s ease-in-out;
-}
+/* Remove sidebar position adjustment - dropdowns stay fixed since sidebar overlays */
 
 .mega-content {
     display: flex;

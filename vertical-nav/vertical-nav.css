@@ -11,7 +11,7 @@
     height: calc(100vh - 60px);
     background-color: var(--bg-primary); /* Match topbar background */
     border-right: 1px solid var(--border-primary); /* Match topbar border */
-    z-index: 999; /* Below topbar */
+    z-index: 999; /* Below topbar, above content */
     display: flex;
     flex-direction: column;
     padding: var(--spacing-md) 0; /* Reduced from var(--spacing-lg) */
@@ -21,9 +21,10 @@
 }
 
 .vertical-nav:hover {
-    width: 220px; /* Expand on hover */
+    width: 220px; /* Expand on hover - overlays content */
     background-color: #F7F7F7;
     box-shadow: 0 4px 20px rgba(209, 174, 135, 0.15); /* Mivara accent glow */
+    z-index: 1000; /* Higher z-index when expanded to overlay content */
 }
 
 /* Vertical Nav Items */

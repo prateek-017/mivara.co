@@ -12,11 +12,89 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeActionButtons();
     loadSimilarProducts();
 
+    // Initialize size switching functionality
+    initializeSizeSwitching();
+
     // Initialize main app functionality
     if (typeof MivaraApp !== 'undefined') {
         MivaraApp.init();
     }
 });
+
+// Direct Size Switching Implementation
+function initializeSizeSwitching() {
+    console.log('Initializing size switching...');
+
+    const sizeOptions = document.querySelectorAll('.size-option');
+    console.log('Found size options:', sizeOptions.length);
+
+    sizeOptions.forEach((option, index) => {
+        console.log(`Size option ${index}:`, option.dataset);
+
+        option.addEventListener('click', function() {
+            console.log('Size clicked:', this.dataset.size);
+
+            // Remove active class from all size options
+            sizeOptions.forEach(opt => opt.classList.remove('active'));
+
+            // Add active class to clicked option
+            this.classList.add('active');
+
+            // Get price data
+            const newPrice = this.dataset.price;
+            const newOriginalPrice = this.dataset.original;
+
+            console.log('New price:', newPrice, 'Original:', newOriginalPrice);
+
+            // Update main price section
+            updateMainPrice(newPrice, newOriginalPrice);
+        });
+    });
+}
+
+// Update Main Price Function
+function updateMainPrice(newPrice, newOriginalPrice) {
+    console.log('Updating main price to:', newPrice);
+
+    // Find price elements
+    const currentPriceElement = document.querySelector('.current-price');
+    const originalPriceElement = document.querySelector('.original-price');
+    const discountBadge = document.querySelector('.discount-badge');
+
+    console.log('Price elements found:', {
+        current: !!currentPriceElement,
+        original: !!originalPriceElement,
+        discount: !!discountBadge
+    });
+
+    // Update current price
+    if (currentPriceElement && newPrice) {
+        currentPriceElement.textContent = `₹${newPrice}`;
+        console.log('Updated current price');
+    }
+
+    // Update original price
+    if (originalPriceElement && newOriginalPrice) {
+        originalPriceElement.textContent = `₹${newOriginalPrice}`;
+        console.log('Updated original price');
+    }
+
+    // Calculate and update discount
+    if (newPrice && newOriginalPrice && discountBadge) {
+        const discountPercent = Math.round(((newOriginalPrice - newPrice) / newOriginalPrice) * 100);
+        discountBadge.textContent = `${discountPercent}% OFF`;
+        console.log('Updated discount:', discountPercent + '%');
+    }
+
+    // Add animation
+    if (currentPriceElement) {
+        currentPriceElement.style.transform = 'scale(1.1)';
+        currentPriceElement.style.transition = 'transform 0.3s ease';
+        setTimeout(() => {
+            currentPriceElement.style.transform = 'scale(1)';
+        }, 300);
+    }
+}
 
 // Initialize Topbar Functionality
 function initializeTopbarFunctionality() {
@@ -256,15 +334,15 @@ function initializeProductOptions() {
         });
     });
 
-    // Size options
+    // Size options with price switching
     const sizeOptions = document.querySelectorAll('.size-option');
     sizeOptions.forEach(option => {
         option.addEventListener('click', function() {
             sizeOptions.forEach(opt => opt.classList.remove('active'));
             this.classList.add('active');
 
-            // Update product based on size selection
-            updateProductSize(this.dataset.size);
+            // Update product based on size selection with price switching
+            updateProductSize(this.dataset.size, this.dataset.price, this.dataset.original);
         });
     });
 }
@@ -276,30 +354,64 @@ function updateProductColor(color) {
     // For now, we'll just log the selection
 }
 
-// Update Product Size
-function updateProductSize(size) {
-    console.log('Selected size:', size);
-    // Here you would typically update availability or pricing based on size
-    // For now, we'll just log the selection
+// Update Product Size with Price Switching
+function updateProductSize(size, newPrice, newOriginalPrice) {
+    console.log('Selected size:', size, 'Price:', newPrice);
+
+    // Update the main price section
+    const currentPriceElement = document.querySelector('.current-price');
+    const originalPriceElement = document.querySelector('.original-price');
+
+    if (currentPriceElement && newPrice) {
+        currentPriceElement.textContent = `₹${newPrice}`;
+    }
+
+    if (originalPriceElement && newOriginalPrice) {
+        originalPriceElement.textContent = `₹${newOriginalPrice}`;
+    }
+
+    // Calculate and update discount percentage
+    if (newPrice && newOriginalPrice) {
+        const discountPercent = Math.round(((newOriginalPrice - newPrice) / newOriginalPrice) * 100);
+        const discountBadge = document.querySelector('.discount-badge');
+        if (discountBadge) {
+            discountBadge.textContent = `${discountPercent}% OFF`;
+        }
+    }
+
+    // Add a subtle animation to indicate price change
+    if (currentPriceElement) {
+        currentPriceElement.style.transform = 'scale(1.05)';
+        currentPriceElement.style.transition = 'transform 0.2s ease';
+        setTimeout(() => {
+            currentPriceElement.style.transform = 'scale(1)';
+        }, 200);
+    }
 }
 
 // Initialize Action Buttons
 function initializeActionButtons() {
-    const addToCartBtn = document.querySelector('.add-to-cart');
-    const buyNowBtn = document.querySelector('.buy-now');
+    const addToCartBtn = document.querySelector('.btn-add-cart');
+    const buyNowBtn = document.querySelector('.btn-buy-now');
     const wishlistBtn = document.querySelector('.wishlist-btn');
 
-    addToCartBtn.addEventListener('click', function() {
-        addToCart();
-    });
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+            addToCart();
+        });
+    }
 
-    buyNowBtn.addEventListener('click', function() {
-        buyNow();
-    });
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener('click', function() {
+            buyNow();
+        });
+    }
 
-    wishlistBtn.addEventListener('click', function() {
-        toggleWishlist();
-    });
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function() {
+            toggleWishlist();
+        });
+    }
 }
 
 // Add to Cart Function
@@ -319,22 +431,38 @@ function addToCart() {
     updateCartCount();
 }
 
-// Update Cart Count
+// Update Cart Count with 9+ functionality
 function updateCartCount() {
     const cartCountElement = document.querySelector('.cart-count');
     if (cartCountElement) {
-        let currentCount = parseInt(cartCountElement.textContent) || 0;
+        let currentCount = parseInt(cartCountElement.textContent.replace('+', '')) || 0;
         currentCount += 1;
-        cartCountElement.textContent = currentCount;
+
+        // Display logic: show "9+" if more than 9 items
+        if (currentCount > 9) {
+            cartCountElement.textContent = '9+';
+        } else {
+            cartCountElement.textContent = currentCount;
+        }
+
+        console.log('Cart updated. Items:', currentCount, 'Display:', cartCountElement.textContent);
 
         // Add animation to cart icon
         const cartLink = document.querySelector('.cart-link');
         if (cartLink) {
-            cartLink.style.transform = 'scale(1.1)';
+            cartLink.style.transform = 'scale(1.2)';
+            cartLink.style.transition = 'transform 0.3s ease';
             setTimeout(() => {
                 cartLink.style.transform = 'scale(1)';
-            }, 200);
+            }, 300);
         }
+
+        // Add bounce animation to cart count
+        cartCountElement.style.transform = 'scale(1.3)';
+        cartCountElement.style.transition = 'transform 0.2s ease';
+        setTimeout(() => {
+            cartCountElement.style.transform = 'scale(1)';
+        }, 200);
     }
 }
 
